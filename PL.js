@@ -174,7 +174,7 @@ var PL = {
         var velocityIterations = 10; // 10
         var positionIterations = 8; // 8
         PL.world.step(timeStep, velocityIterations, positionIterations);
-        var flipLeft = keys.lctrl in keysDown || keys.a in keysDown;
+        var flipLeft = keys.lctrl in keysDown || keys.a in keysDown || keys.left in keysDown;
         var motorSpeed = 480;
         if (flipLeft) {
             PL.leftMotor.setMotorSpeed(motorSpeed);
@@ -185,7 +185,7 @@ var PL = {
             if (PL.midLeftMotor != null)
                 PL.midLeftMotor.setMotorSpeed(-motorSpeed);
         }
-        var flipRight = keys.rctrl in keysDown || keys.d in keysDown;
+        var flipRight = keys.rctrl in keysDown || keys.d in keysDown || keys.right in keysDown;
         if (flipRight) {
             PL.rightMotor.setMotorSpeed(-motorSpeed);
             if (PL.midRightMotor != null)
