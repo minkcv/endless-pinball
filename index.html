@@ -26,7 +26,7 @@
                 padding-left: 20px;
                 float: left;
             }
-            a {
+            a, p {
                 color: #fff;
                 text-decoration: none;
             }
@@ -74,11 +74,9 @@
             document.body.appendChild( stats.dom );
             if (!debug) {
                 document.body.removeChild(stats.dom);
-                document.body.style.textAlign = 'center';
                 threed.style.float = 'none';
                 threed.style.marginLeft = 'auto';
                 threed.style.marginRight = 'auto';
-                document.getElementById('map').style.display = 'none';
                 document.getElementById('debug').style.display = 'none';
                 threed.style.width = '100%';
                 threed.style.height = '100%';
