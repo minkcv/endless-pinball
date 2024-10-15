@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <title>Endless Pinball</title>
+        <script src='lib/planck-with-testbed.min.js'></script>
+        <script src='lib/three.js' type='text/javascript'></script>
+        <script src='lib/stats.min.js' type='text/javascript'></script>
+        <style>
+            body {
+                margin: 0px;
+                font-family: serif;
+                color: #2c2c2c;
+                cursor: crosshair;
+            }
+            #game, #map {
+                float:left;
+            }
+            #debug {
+                bottom: 0px;
+                font-family: monospace;
+                position: absolute;
+                z-index: 99;
+                color: #fff;
+                display: none;
+            }
+            #debug > div{
+                padding-left: 20px;
+                float: left;
+            }
+            a {
+                color: #fff;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body style='background-color: #000000'>
+        <div id='top' style='height: 600px; overflow: hidden;'>
+            <div id='game' style='width: 800px; height:600px;'></div>
+        </div>
+        <div id='debug'>
+            <div>THREE
+                <ul class='three'>
+                    <li id='x-pos'></li>
+                    <li id='z-pos'></li>
+                    <li id='angle'></li>
+                </ul>
+            </div>
+            <div>Box2d
+                <ul class='box2d'>
+                    <li id='x-pos'></li>
+                    <li id='y-pos'></li>
+                    <li id='table-x-pos'></li>
+                    <li id='table-y-pos'></li>
+                    <li id='angle'></li>
+                    <li id='ball-lv'></li>
+                    <li id='flipperangle'></li>
+                </ul>
+            </div>
+        </div>
+        <div style="position: absolute; bottom: 0px; left: 0px;">
+            <p>LCTRL/RCTRL</p>
+            <p>A/D</p>
+        </div>
+        <div style='position: absolute; bottom: 0px; right: 0px'>
+            <span id="testbed-info"></span>
+            <span id="testbed-status"></span>
+            <button id="testbed-play" style="display: none"></button>
+            <a href='http://minkcv.com' target="_blank">minkcv.com</a><br>
+        </div>
+        <script>
+            var debug = !location.origin.includes('github.io');
+            var threed = document.getElementById('game');
+            var stats = new Stats();
+            stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+            document.body.appendChild( stats.dom );
+            if (!debug) {
+                document.body.removeChild(stats.dom);
+                document.body.style.textAlign = 'center';
+                threed.style.float = 'none';
+                threed.style.marginLeft = 'auto';
+                threed.style.marginRight = 'auto';
+                document.getElementById('map').style.display = 'none';
+                document.getElementById('debug').style.display = 'none';
+                threed.style.width = '100%';
+                threed.style.height = '100%';
+                document.getElementById('top').style.height = '100%';
+            }
+            var keysDown = [];
+            var keys = { right: "ArrowRight", left: "ArrowLeft", lshift: "ShiftLeft", rshift: "ShiftRight", r: "KeyR", a: "KeyA", d: "KeyD", lctrl: "ControlLeft", rctrl: "ControlRight"};
+            addEventListener("keydown", function(e) {
+                keysDown[e.code] = true;
+            }, false);
+
+            addEventListener("keyup", function(e) {
+                delete keysDown[e.code];
+            }, false);
+            addEventListener('resize', function(e) {
+                TH.resize(threed.clientWidth, threed.clientHeight);
+            }, false);
+        </script>
+        <script src='util.js' type='text/javascript'></script>
+        <script src='TH.js' type='text/javascript'></script>
+        <script src='PL.js' type='text/javascript'></script>
+        <script src='main.js' type='text/javascript'></script>
+    </body>
+</html>
